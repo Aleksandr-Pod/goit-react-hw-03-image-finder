@@ -1,7 +1,13 @@
-export default function ImageGalleryItem() { 
+import PropTypes from 'prop-types';
+
+export default function ImageGalleryItem({ item }) { 
     return (
-        <li class="gallery-item">
-            <img src="" alt="" />
+        <li className="ImageGalleryItem">
+            <img className="ImageGalleryItem-image" src={item.webformatURL} alt="" />
         </li>
     )
+}
+
+ImageGalleryItem.propTypes = {
+    item: PropTypes.object
 }
