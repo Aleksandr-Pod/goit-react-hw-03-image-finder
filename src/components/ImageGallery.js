@@ -2,16 +2,19 @@ import ImageGalleryItem from "./ImageGalleryItem";
 import Button from './Button';
 import PropTypes from 'prop-types';
 
-export default function ImageGallery({ gallery, page, totalItems, loadMore } ) {
-    const rest = (totalItems - page * 12);
+export default function ImageGallery({ gallery, page, isLoading, totalItems, loadMore, showModal } ) {
+    const theRest = (totalItems - page * 12);
     return (
         <>
-        <ul className="ImageGallery">
+            <ul className="ImageGallery"> 
             {gallery.map(item => (
-                <ImageGalleryItem key={item.id} item={item}/>
+                <ImageGalleryItem
+                    key={item.id}
+                    item={item}
+                    onClick={showModal} />
             ))}
         </ul>
-            {rest > 0 && <Button loadMore={loadMore}/>}
+            {theRest > 0 && !isLoading && <Button loadMore={loadMore}/>}
         </>
     )
 }

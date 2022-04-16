@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-export default function ImageGalleryItem({ item }) { 
+export default function ImageGalleryItem({ item, onClick }) { 
     return (
-        <li className="ImageGalleryItem">
+        <li className="ImageGalleryItem" onClick={() => onClick(item) }> 
             <img className="ImageGalleryItem-image" src={item.webformatURL} alt="" />
         </li>
     )

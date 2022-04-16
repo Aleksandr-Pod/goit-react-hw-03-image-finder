@@ -35,7 +35,15 @@ img {
   grid-gap: 16px;
   padding-bottom: 24px;
 }
-
+.error {
+    text-align: center;
+    color: red;
+    font-size: 40px;
+}
+.spinner {
+    display: flex;
+    justify-content: center;
+}
 /*
  * Стили компонента Searchbar
  */
@@ -126,8 +134,7 @@ img {
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 16px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 10px 0;
   padding: 0;
   list-style: none;
   margin-left: auto;
