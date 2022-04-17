@@ -1,10 +1,13 @@
+import { FaSearch } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+
 export default function Searchbar({ onSubmit }) {
 
     return (
         <header className="Searchbar">
         <form className="SearchForm" onSubmit={onSubmit}>
             <button type="submit" className="SearchForm-button">
-                <span className="SearchForm-button-label">Search</span>
+                <FaSearch size={24}/>
             </button>
 
             <input
@@ -17,5 +20,7 @@ export default function Searchbar({ onSubmit }) {
             />
         </form>
     </header>)
-
+}
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func
 }

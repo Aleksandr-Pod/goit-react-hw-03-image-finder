@@ -53,7 +53,8 @@ handleQuery() {
     evt.preventDefault();
     this.setState({ searchName: evt.target.elements.searchName.value.trim().toLowerCase(), page: 1, gallery: [] });
   }
-  loadMore = () => { 
+  loadMore = () => {
+    window.scrollBy(0, 200); // не работает
     this.setState(prev => ({page: prev.page + 1}))
   }
   toggleModal = (img) => {

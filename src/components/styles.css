@@ -1,3 +1,5 @@
+/* @import svg from './searchIcon.svg'; */
+
 html {
   box-sizing: border-box;
   width: 100vw;
@@ -84,7 +86,7 @@ img {
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  /* background-image: ('searchIcon.svg'); */
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -188,7 +190,7 @@ img {
 * Стили компонента Buton (Load more)
 */
 .Button {
-    margin: 10px auto;
+  margin: 50px auto;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;

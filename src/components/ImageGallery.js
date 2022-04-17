@@ -19,5 +19,10 @@ export default function ImageGallery({ gallery, page, isLoading, totalItems, loa
     )
 }
 ImageGallery.propTypes = {
-    gallery: PropTypes.array
+    gallery: PropTypes.array,
+    page: PropTypes.number,
+    totalItems: PropTypes.number,
+    loadMore: PropTypes.func,
+    isLoading: PropTypes.bool,
+    showModal: PropTypes.func
 }

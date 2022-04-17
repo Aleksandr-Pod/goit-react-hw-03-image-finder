@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -11,4 +12,7 @@ export default function Modal({ currentImg, handleOverlayClick }) {
             </div>
         </div>, modalRoot
     )
+}
+Modal.prototype = {
+    currentImg: PropTypes.object
 }

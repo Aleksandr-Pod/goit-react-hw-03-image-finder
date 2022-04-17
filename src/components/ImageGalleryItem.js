@@ -9,5 +9,6 @@ export default function ImageGalleryItem({ item, onClick }) {
 }
 
 ImageGalleryItem.propTypes = {
-    item: PropTypes.object
+    item: PropTypes.object,
+    onClick: PropTypes.func
 }
