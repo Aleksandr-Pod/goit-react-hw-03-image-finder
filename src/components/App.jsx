@@ -54,7 +54,7 @@ handleQuery() {
     this.setState({ searchName: evt.target.elements.searchName.value.trim().toLowerCase(), page: 1, gallery: [] });
   }
   loadMore = () => { 
-    this.setState(prev => ({page: prev.page+=1}))
+    this.setState(prev => ({page: prev.page + 1}))
   }
   toggleModal = (img) => {
     this.setState(prev => ({ showModal: !prev.showModal, currentImg: img }))
