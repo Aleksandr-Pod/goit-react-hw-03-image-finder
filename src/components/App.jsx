@@ -81,7 +81,7 @@ handleQuery() {
             isLoading={isLoading}
             showModal={this.toggleModal} />
         }
-          {isLoading && <Loader />}
+          <Loader loading={isLoading}/>
           {showModal && <Modal handleOverlayClick={this.handleOverlayClick} currentImg={currentImg }/>}
     </div>
   );
