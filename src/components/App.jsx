@@ -7,6 +7,8 @@ import Modal from './Modal';
 
 
 export class App extends Component {
+  static PERPAGE = 12;
+
   state = {
     searchName: "",
     gallery: [],
@@ -16,45 +18,61 @@ export class App extends Component {
     showModal: false,
     currentImg: {},
     err: null,
-}
-    
-componentDidMount() {
-  window.document.addEventListener('keydown', this.handleEsc);
-}
-componentWillUnmount() {
+  }
+      
+  componentDidMount() {
+    window.document.addEventListener('keydown', this.handleEsc);
+
+  }
+  componentWillUnmount() {
     window.document.removeEventListener('keydown', this.handleEsc);
   }
-componentDidUpdate(_, prevState) {
-  if (prevState.searchName !== this.state.searchName ||
-    prevState.page !== this.state.page) {
-    console.log("Новый запрос");
-    this.handleQuery();
+  componentDidUpdate(_, prevState) {
+    if (prevState.searchName !== this.state.searchName ||
+      prevState.page !== this.state.page) {
+      this.doQuery();
+    }
+    if (prevState.gallery.length !== 0 &
+      prevState.gallery.length < this.state.gallery.length) {
+      window.scrollBy({
+        top: window.innerHeight - 200,
+        behavior: 'smooth',
+      })
+    }
   }
-}
-handleQuery() {
-  const URL = "https://pixabay.com/api/";
-  const key = "25089539-92235f01f3468a6ac8c56a646";
-  const { page, searchName } = this.state;
-  this.setState({ isLoading: true });
-
-  fetch(`${URL}?q=${searchName}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
-    .then(resp => resp.json())
-    .then(gallery => {
-      if (gallery.hits.length === 0) {
-        return Promise.reject(new Error("поиск не дал результата"))
-      }
-      this.state.gallery.length === 0 ?
-      this.setState({ gallery: gallery.hits, totalItems: gallery.totalHits, isLoading: false, err: null }) :
-      this.setState(prev => ({ gallery: [...prev.gallery, ...gallery.hits], isLoading: false, err: null }));
-    })
-    .catch(err => this.setState({ err }))
-}
+  doQuery() {
+    const URL = "https://pixabay.com/api/";
+    const key = "25089539-92235f01f3468a6ac8c56a646";
+    const { page, searchName } = this.state;
+    this.setState({ isLoading: true });
+    this.doFetch(URL, key, page, searchName);
+  }
+  doFetch(URL, key, page, searchName) {
+    fetch(`${URL}?q=${searchName}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${App.PERPAGE}`)
+      .then(resp => resp.json())
+      .then(gallery => {
+        if (gallery.hits.length === 0) {
+          return Promise.reject(new Error("поиск не дал результата"))
+        }
+        this.handleResponse(gallery);
+      })
+      .catch(err => this.setState({ err }))
+  }
+  handleResponse(gallery) {
+    this.state.gallery.length === 0 ?
+    this.setState({ gallery: gallery.hits, totalItems: gallery.totalHits, isLoading: false, err: null }) :
+    this.setState(prev => ({ gallery: [...prev.gallery, ...gallery.hits], isLoading: false, err: null }));
+  }
   onSubmit = (evt) => {
     evt.preventDefault();
-    this.setState({ searchName: evt.target.elements.searchName.value.trim().toLowerCase(), page: 1, gallery: [] });
+    this.setState({
+      searchName: evt.target.elements.searchName.value.trim().toLowerCase(),
+      page: 1,
+      gallery: []
+    });
   }
   loadMore = () => {
-    window.scrollBy(0, 200); // не работает
+
     this.setState(prev => ({page: prev.page + 1}))
   }
   toggleModal = (img) => {
@@ -64,10 +82,9 @@ handleQuery() {
     if (evt.target === evt.currentTarget) this.toggleModal({})
   }
   handleEsc = (evt) => {
-  if(evt.code === 'Escape') this.toggleModal({})
-} 
+    if(evt.code === 'Escape') this.toggleModal({})
+  } 
   render() {
-    console.log("Рендер");  
     const { gallery, page, totalItems, isLoading, showModal, currentImg, err } = this.state;
       return (
     <div>
