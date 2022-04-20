@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import "./styles.css";
-import Searchbar from './Searchbar';
-import ImageGallery from './ImageGallery';
-import Loader from './Loader';
-import Modal from './Modal';
+import Searchbar from './SearchBar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Loader from './Loader/Loader';
+import Modal from './Modal/Modal';
 
 
 export class App extends Component {
@@ -84,6 +84,7 @@ export class App extends Component {
   handleEsc = (evt) => {
     if(evt.code === 'Escape') this.toggleModal({})
   } 
+
   render() {
     const { gallery, page, totalItems, isLoading, showModal, currentImg, err } = this.state;
       return (

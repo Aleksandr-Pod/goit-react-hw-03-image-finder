@@ -1,5 +1,5 @@
-import ImageGalleryItem from "./ImageGalleryItem";
-import Button from './Button';
+import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
+import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 
 export default function ImageGallery({ gallery, page, isLoading, totalItems, loadMore, showModal } ) {
