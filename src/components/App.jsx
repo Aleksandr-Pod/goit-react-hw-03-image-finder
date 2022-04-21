@@ -20,13 +20,6 @@ export class App extends Component {
     err: null,
   }
       
-  componentDidMount() {
-    window.document.addEventListener('keydown', this.handleEsc);
-
-  }
-  componentWillUnmount() {
-    window.document.removeEventListener('keydown', this.handleEsc);
-  }
   componentDidUpdate(_, prevState) {
     if (prevState.searchName !== this.state.searchName ||
       prevState.page !== this.state.page) {
@@ -82,7 +75,7 @@ export class App extends Component {
     if (evt.target === evt.currentTarget) this.toggleModal({})
   }
   handleEsc = (evt) => {
-    if(evt.code === 'Escape') this.toggleModal({})
+      if(evt.code === 'Escape') this.toggleModal({})
   } 
 
   render() {
@@ -101,7 +94,7 @@ export class App extends Component {
             showModal={this.toggleModal} />
         }
           <Loader loading={isLoading}/>
-          {showModal && <Modal handleOverlayClick={this.handleOverlayClick} currentImg={currentImg }/>}
+          {showModal && <Modal handleOverlayClick={this.handleOverlayClick} onEsc={ this.handleEsc} currentImg={currentImg }/>}
     </div>
   );
   }
